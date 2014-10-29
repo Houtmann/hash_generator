@@ -28,6 +28,8 @@ class core():
             hsh = hashlib.sha1()
         elif typ == 'sha256':
             hsh = hashlib.sha256()
+        elif typ == 'sha512':
+            hsh = hashlib.sha512()
             
         with open(self.openfiles, 'rb+') as f:
             for chunk in iter(lambda: f.read(8192), b''): 
@@ -43,7 +45,7 @@ class gui(Tk, core):
         self.main.title('Hash Generator')
         self.main.resizable(width=False, height=False)
 
-        hash_tuple = ('md5', 'sha1', 'sha256') #Dict for hash library
+        hash_tuple = ('md5', 'sha1', 'sha256', 'sha512') #Dict for hash library
         self.arg = StringVar()
         self.Combo = Combobox(self.main, value=hash_tuple, textvariable = self.arg)
         self.Combo.grid(row = 3, column = 1, sticky=(E,N))
@@ -53,7 +55,7 @@ class gui(Tk, core):
         self.openfile = Button(self.main, text='Open file', command = self.openf).grid(
             row = 0, column = 1, pady = 0)
         
-        self.hash = Text(self.main, width = 60, height = 2)
+        self.hash = Text(self.main, width = 80, height = 2)
         self.hash.grid(row = 1, column = 1, pady = 5)
         
         self.Bhash = Button(self.main, text = 'Hash !')
